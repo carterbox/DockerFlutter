@@ -45,8 +45,10 @@ jobs:
           build-args: |
             flutterVersion=${{ inputs.branch_name }}
           cache-from: |
+            type=gha
             ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
-            type=registry
+            type=registry,ref=${{ env.IMAGE_NAME }}
+
           context: .
           platforms: |
             ${{ matrix.platform }}
