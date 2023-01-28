@@ -40,6 +40,15 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          labesl: |
+            ${{ matrix.platform }}
+          tags: |
+            ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
+            type=sha
+
       - uses: docker/build-push-action@v3
         with:
           build-args: |
@@ -48,10 +57,9 @@ jobs:
             type=gha
             ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
             type=registry,ref=${{ env.IMAGE_NAME }}
-
           context: .
           platforms: |
             ${{ matrix.platform }}
           push: true
-          tags: |
-            ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

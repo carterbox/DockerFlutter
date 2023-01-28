@@ -4,7 +4,7 @@ ENV TZ=US/Central
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && \
-    apt-get install --yes --quiet bash curl file git unzip xz-utils zip libglu1-mesa clang cmake ninja-build pkg-config && \
+    apt-get install --yes --quiet bash curl file git unzip xz-utils zip libglu1-mesa clang cmake ninja-build pkg-config libgtk-3-dev && \
     rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -r -g 1441 flutter && useradd --no-log-init -r -u 1441 -g flutter -m flutter
