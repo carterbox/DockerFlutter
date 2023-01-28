@@ -45,10 +45,11 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           labels: |
-            ${{ matrix.platform }}
+            platform=${{ matrix.platform }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
+            ${{ inputs.branch_name }}
             type=sha
+            type=ref,event=tag
 
       - uses: docker/build-push-action@v3
         with:
