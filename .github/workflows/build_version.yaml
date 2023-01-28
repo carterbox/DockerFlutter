@@ -41,9 +41,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: docker/metadata-action@v4
+        id: meta
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          labesl: |
+          labels: |
             ${{ matrix.platform }}
           tags: |
             ${{ env.IMAGE_NAME }}:${{ inputs.branch_name }}
