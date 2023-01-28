@@ -1,5 +1,8 @@
 FROM --platform=$BUILDPLATFORM ubuntu:20.04
 
+ENV TZ=US/Central
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get update && \
     apt-get install --yes --quiet bash curl file git unzip xz-utils zip libglu1-mesa clang cmake ninja-build pkg-config && \
     rm -rf /var/lib/apt/lists/*
