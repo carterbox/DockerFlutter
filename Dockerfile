@@ -19,7 +19,7 @@ ADD https://api.github.com/repos/flutter/flutter/compare/${flutterVersion}...${f
 
 RUN git clone https://github.com/flutter/flutter.git -b ${flutterVersion} flutter-sdk
 
-RUN flutter-sdk/bin/flutter precache
+RUN flutter-sdk/bin/flutter precache --universal --linux
 
 RUN flutter-sdk/bin/flutter config --no-analytics
 
